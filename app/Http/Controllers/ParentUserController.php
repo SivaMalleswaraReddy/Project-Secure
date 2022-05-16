@@ -25,18 +25,18 @@ class ParentUserController extends Controller
         return response()->json($comments);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+//    /**
+//     * Show the form for creating a new resource.
+//     *
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function create()
+//    {
+//        //
+//    }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a new create ParentUser.
      *
      * @param  \App\Http\Requests\StoreParentURequest  $request
      * @return \Illuminate\Http\JsonResponse
@@ -62,7 +62,7 @@ class ParentUserController extends Controller
             'email'=>$request->get('email'),
             'password'=>$request->get('password'),
             'gender'=>$request->get('gender'),
-            'is_approved'=>'not-approved',
+            'is_approved'=>'not_approved',
         ]);
 
         $newUser->save();
@@ -71,7 +71,7 @@ class ParentUserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified ParentUser Details.
      *
      * @param $parentUser
      * @return \Illuminate\Http\JsonResponse
@@ -81,6 +81,12 @@ class ParentUserController extends Controller
         $user = ParentUser::findOrFail($parentUser);
         return response()->json($user);
     }
+    /**
+     * ParentUser can check the ChildUser Details.
+     *
+     * @param $name
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function showchild($name)
     {
         $ChildUsers = ChildUser::all()->where('first_name','=',$name)->first();
@@ -89,27 +95,27 @@ class ParentUserController extends Controller
         return response()->json($user);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ParentUser  $parentUser
-     * @return \Illuminate\Http\Response
-     */
+//    /**
+//     * Display the specified resource.
+//     *
+//     * @param  \App\Models\ParentUser  $parentUser
+//     * @return \Illuminate\Http\Response
+//     */
 
+//
+//    /**
+//     * Show the form for editing the specified resource.
+//     *
+//     * @param ParentUser $parentUser
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function edit(ParentUser $parentUser)
+//    {
+//        //
+//    }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param ParentUser $parentUser
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ParentUser $parentUser)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
+     * Update the specified ParentUser Details in storage By using ParentUsed ID.
      *
      * @param  \App\Http\Requests\UpdateParentURequest  $request
      * @param  \App\Models\ParentUser  $parentUser
@@ -144,7 +150,7 @@ class ParentUserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified ParentUser Details from storage.
      *
      * @param  \App\Models\ParentUser  $parentUser
      * @return \Illuminate\Http\JsonResponse
@@ -156,20 +162,32 @@ class ParentUserController extends Controller
 
         return response()->json($user::all());
     }
+    /**
+     * ParentUser can check the ChildUser Transactions.
+     *
+     * @param  \App\Models\ParentUser  $user
+     * @return \Illuminate\Http\JsonResponse
+     */
     public  function showtransaction($user)
     {
 
-        $child = ChildUser::all()->where('first_name','=',$user)->first();
+        $child = ChildUser::all()->where('id','=',$user)->first();
       $id = $child->id;
         $card = $child->card_number;
         $cards = Card::all()->where('child_id','=',$id)->first();
         $cardNum = $cards->card_number;
-        $transaction = DB::table('transactions')->select('vendor_name', 'transaction_amount',
-            'transaction_date', 'transaction_status')->where('card_number', '=', $cardNum)->get();
+        $transaction = DB::table('transactions')->select('vendor_name', 'id','transaction_amount',
+            'transaction_date', 'transaction_status','transaction_type')->where('card_number', '=', $cardNum)->get();
 
         return response()->json($transaction);
 
     }
+    /**
+     *  The ParentUser is register the Childs details from whom Secure(Prepaid-Card) will be assigned.
+     *
+     * @param  \App\Models\ParentUser  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function storechild(\Illuminate\Http\Request $request)
     {
         $request->validate([

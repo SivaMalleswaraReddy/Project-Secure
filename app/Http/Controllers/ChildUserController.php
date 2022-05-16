@@ -6,14 +6,16 @@ use App\Http\Requests\StoreChildURequest;
 use App\Http\Requests\UpdateChildURequest;
 use App\Models\ChildUser;
 use App\Models\ParentUser;
+use App\Models\Transaction;
 use http\Env\Request;
+use Illuminate\Support\Facades\DB;
 
 class ChildUserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of All ChildUser Details.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
@@ -21,18 +23,18 @@ class ChildUserController extends Controller
         return response()->json($comments);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+//    /**
+//     * Show the form for creating a new resource.
+//     *
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function create()
+//    {
+//        //
+//    }
 
     /**
-     * Store a newly created resource in storage.
+     * ParentUser can Store a newly ChildUser Register .
      *
      * @param  \App\Http\Requests\StoreChildURequest  $request
      * @return \Illuminate\Http\JsonResponse
@@ -66,16 +68,22 @@ class ChildUserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * ChildUser can check is Details  .
      *
      * @param  \App\Models\ChildUser  $childU
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(ChildUser $childU)
     {
         $user = ChildUser::findOrFail($childU);
         return response()->json($user);
     }
+    /**
+     * ChildUser can check is Transactions.
+     *
+     * @param  \App\Models\ChildUser  $transaction
+     * @return \Illuminate\Http\JsonResponse
+     */
    public function showTransaction(transaction $transaction)
     {
         $comments = Transaction::all();
@@ -85,23 +93,23 @@ class ChildUserController extends Controller
 
 
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ChildUser  $childU
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ChildUser $childU)
-    {
-        //
-    }
+//    /**
+//     * Show the form for editing the specified resource.
+//     *
+//     * @param  \App\Models\ChildUser  $childU
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function edit(ChildUser $childU)
+//    {
+//        //
+//    }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified ChildUser Details in storage.
      *
      * @param  \App\Http\Requests\UpdateChildURequest  $request
      * @param  \App\Models\ChildUser  $childU
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateChildURequest $request, ChildUser $childU)
     {
@@ -132,10 +140,10 @@ class ChildUserController extends Controller
         return response()->json($user);
     }
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified ChildUser from storage.
      *
      * @param  \App\Models\ChildUser  $childU
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(ChildUser $childU)
     {
@@ -143,6 +151,19 @@ class ChildUserController extends Controller
         $user->delete();
 
         return response()->json($user::all());
+    }
+    /**
+     * Admin can check the ChildUser requests.
+     *
+     * @param \App\Models\admin $users
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function childrequestStatus(){
+        $users = DB::table('child_users')->select('*')
+            ->where('is_approved' , '=' , 'not_approved')->get();
+
+
+        return  response()->json($users);
     }
 
 }

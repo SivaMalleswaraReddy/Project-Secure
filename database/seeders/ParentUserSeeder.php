@@ -12,14 +12,13 @@ use Illuminate\Support\Facades\Hash;
 class ParentUserSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Here we are using faker for generate the fake data about ParentUser, we are given the below data like  id, name, email, phone_number, password, address, gender, pan_card and is_approved.
+     * After we Run the database ParentUserSeeder.
      *
      * @return void
      */
     public function run()
     {
-      //  DB::table('parentuser')->insert({
-
         $faker = Factory::create();
         $parent = new ParentUser();
         $parent->name = $faker->firstName;

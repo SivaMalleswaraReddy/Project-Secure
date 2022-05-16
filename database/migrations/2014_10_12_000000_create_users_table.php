@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateUsersTable extends Migration
 {
     /**
+     * Here User data store in Database, like id, name, email, password.
      * Run the migrations.
      *
      * @return void
@@ -17,7 +18,6 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('role_as');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

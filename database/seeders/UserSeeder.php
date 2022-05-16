@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Hash;
 class UserSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Here we are using faker for generate the fake data about User, we are given the below data like  id, name, email, and password.
+     * After we Run the database UserSeeder.
      *
      * @return void
      */
@@ -19,7 +20,6 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'shiva',
             'email' => 'shiva@gmail.com',
-            'role_as'=>'admin',
             'password' => Hash::make('12345')
         ]);
     }

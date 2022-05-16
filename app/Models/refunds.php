@@ -5,13 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Card extends Model
+class refunds extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'card_number',
-        'exp_date',
-        'cvv',
+        'id',
+        'refund_amount',
+        'refund_status',
+        'refund_date',
 
     ];
+
 }

@@ -13,17 +13,16 @@ class AdminMiddleware
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function handle(Request $request, Closure $next, $role)
+    public function handle(Request $request, Closure $next)
     {
-        
-        if(Auth::user()->role_as == 'admin' && $role == 'admin')
+        if(Auth::user()->role_as == 'admin')
         {
             return $next($request);
         }
         else{
-            return response()->json(['message' => 'You are not allowed to access the dashboard']); 
+            return response()->json(['message' => 'You are not allowed to access the dashboard']);
         }
     }
 }

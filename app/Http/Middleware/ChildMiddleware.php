@@ -13,16 +13,16 @@ class ChildMiddleware
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function handle(Request $request, Closure $next, $role)
+    public function handle(Request $request, Closure $next, )
     {
-        if(Auth::user()->role_as == 'child' && $role == 'child')
+        if(Auth::user()->role_as == 'child' )
         {
             return $next($request);
         }
         else{
-            return response()->json(['message' => 'You are not allowed to access the vendor dashboard'],401); 
+            return response()->json(['message' => 'You are not allowed to access the dashboard']);
         }
     }
 }

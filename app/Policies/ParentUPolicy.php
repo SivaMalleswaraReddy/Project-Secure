@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
+use App\Models\ParentUser;
 use App\Models\User;
-use App\Models\admin;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class AdminPolicy
+class ParentUPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class AdminPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\admin  $admin
+     * @param  \App\Models\ParentUser  $parentU
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, admin $admin)
+    public function view(User $user, ParentUser $parentU)
     {
         //
     }
@@ -48,10 +48,10 @@ class AdminPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\admin  $admin
+     * @param  \App\Models\ParentUser  $parentU
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, admin $admin)
+    public function update(User $user, ParentUser $parentU)
     {
         //
     }
@@ -60,10 +60,10 @@ class AdminPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\admin  $admin
+     * @param  \App\Models\ParentUser  $parentU
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, admin $admin)
+    public function delete(User $user, ParentUser $parentU)
     {
         //
     }
@@ -72,10 +72,10 @@ class AdminPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\admin  $admin
+     * @param  \App\Models\ParentUser  $parentU
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, admin $admin)
+    public function restore(User $user, ParentUser $parentU)
     {
         //
     }
@@ -84,10 +84,10 @@ class AdminPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\admin  $admin
+     * @param  \App\Models\ParentUser  $parentU
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, admin $admin)
+    public function forceDelete(User $user, ParentUser $parentU)
     {
         //
     }
